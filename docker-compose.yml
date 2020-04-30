@@ -33,9 +33,11 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:    
-      - "./db:/var/lib/mysql"
+      - "db:/var/lib/mysql"
     neywoks:
       - www
 
 networks:
   www:
+volumes:
+  db:
