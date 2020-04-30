@@ -33,7 +33,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:    
       - "db:/var/lib/mysql"
-    neywoks:
+    netwoks:
       - www
 
 networks:
