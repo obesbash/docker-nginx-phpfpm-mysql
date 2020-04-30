@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - 80:80
+    volumes:
+      - ./www:/srv/www
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - www
+  phpfpm:
+    image: php:fpm-alpine
+    volumes:
+      - ./www:/srv/www
+    networks:
+      - www
+  mysqldb:
+    image: mysql:${MYSQL_VERSION}
+    restart: always
+    env_file:
+      - ".env"
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:    
+      - "./db:/var/lib/mysql"
+    neywoks:
+      - www
+
+networks:
+  www:
